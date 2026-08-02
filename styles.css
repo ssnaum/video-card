@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background: #000;
+}
+
+body {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100vw;
+  height: 100dvh;
+}
+
+/* FIT: largest 16:9 box that fits the viewport, centered, nothing cropped. */
+iframe {
+  display: block;
+  border: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-height: 100%;
+  max-width: calc(100dvh * 16 / 9);
+}
+
+/* COVER: edge-to-edge fill, video centered and cropped on the long side.
+   To use it, delete the `iframe` rule above and uncomment this one.
+
+iframe {
+  display: block;
+  border: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100dvh;
+  min-width: calc(100dvh * 16 / 9);
+  min-height: calc(100vw * 9 / 16);
+}
+*/
