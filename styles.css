@@ -13,27 +13,17 @@ body {
 body {
   position: fixed;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  width: 100vw;
-  height: 100dvh;
 }
 
-/* FIT: largest 9:16 box that fits the viewport, centered, nothing cropped. */
-iframe {
-  display: block;
-  border: 0;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 9 / 16;
-  max-height: 100%;
-  max-width: calc(100dvh * 9 / 16);
+/* The embed player keeps a 16:9 stage and letterboxes vertical video inside it,
+   so the iframe itself must be 16:9. --frame is the height of the 9:16 video
+   area inside that stage: the largest one that still fits the viewport. The
+   stage is 16/9 wider than the video area; that surplus overflows and is
+   clipped by the body, leaving the video itself centered and screen-filling. */
+:root {
+  --frame: min(100dvh, 100vw * 16 / 9);
 }
-
-/* COVER: edge-to-edge fill, video centered and cropped on the long side.
-   To use it, delete the `iframe` rule above and uncomment this one.
 
 iframe {
   display: block;
@@ -42,9 +32,6 @@ iframe {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 100dvh;
-  min-width: calc(100dvh * 9 / 16);
-  min-height: calc(100vw * 16 / 9);
+  height: var(--frame);
+  width: calc(var(--frame) * 16 / 9);
 }
-*/
